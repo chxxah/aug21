@@ -52,13 +52,42 @@
 <script type="text/javascript">
 
 $(function(){
+	
+	$(document).on("click", ".del", function(){
+		let bno = $(".bno").val();
+		let uuid = $(".uuid").val();
+		
+		// 가상 form 만들어서 body에 넣고 전송하기
+		let form = $('<form></form>');
+		
+		// form의 속성을 붙여줌
+		form.attr("action","./delete");
+		form.attr("method", "post");
+		
+		//json 객체를 쓸거
+		form.append($("<input>", {type:"hidden", name:"bno", value:bno}));//value에 변수 안 만들고 바로 넣어도 됨
+		form.append($("<input>", {type:"hidden", name:"uuid", value:uuid}));
+		
+		form.appendTo("body");
+		
+		form.submit();
+	});
+	
+	$(document).on("click", ".edit", function(){
+		let bno = $(".bno").val();
+		let uuid = $(".uuid").val();
+		alert(bno + " | " + uuid);
+	});
+	
+	
+	
 	$(".detail").click(function(){
 		let bno = $(this).children("td").eq(0).html();
 		let comment = $(this).children("td").eq(1).children(".bg-primary").text().length;
 		let title = $(this).children("td").eq(1).text();
 		let date = $(this).children("td").eq(2).html();
 		let name = $(this).children("td").eq(3).html();
-		let read = $(this).children("td").eq(4).html();
+		let read = Number($(this).children("td").eq(4).html())+1;
 		
 		if(comment > 0) {
 			title = title.slice(0, -comment);
@@ -67,11 +96,15 @@ $(function(){
 		$.ajax({
 			url:"./detail",
 			type: "post",
-			data:{ "bno" : bno },
+			data:{ bno : bno },
 			dataType: "json",
 			success: function(data){
 				$(".modal-title").text(title);
-				$(".detail-name").text(name);
+				name = name + '<img class="edit" src="./img/edit.png"> <img class="del" src="./img/delete.png">';
+				name += '<input type="hidden" class="bno" value="'+ bno +'">';
+				name += '<input type="hidden" class="uuid" value="'+ data.uuid +'">';
+				
+				$(".detail-name").html(name);
 				$(".detail-date").text(date);
 				$(".detail-read").text(read);
 				$(".detail-content").html(data.content);
@@ -90,8 +123,6 @@ $(function(){
 
 	
 });
-
-
 </script>
 </head>
 <body>
@@ -103,7 +134,6 @@ $(function(){
 			<a class="btn btn-primary btn-xl text-uppercase" href="#services">Click Me</a>
 		</div>
 	</header>
-
 	<!-- Services-->
 	<section class="page-section" id="services">
 		<div class="container">

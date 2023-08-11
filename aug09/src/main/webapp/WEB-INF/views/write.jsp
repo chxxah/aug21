@@ -7,28 +7,39 @@
 <meta charset="UTF-8">
 <title>WRITE</title>
 <script src="./js/jquery-3.7.0.min.js"></script>
-<script type="text/javascript" src="/smartEditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="css/styles.css" rel="stylesheet" />
 <style type="text/css">
 
-	.write-form {
-		width: 70%;
+	.input-group {
+		width: 80%;
 		margin: 0 auto;
+		text-align: left;
 	}
 	
-	#write-title{
-		width: 99.3%;
+	.input-group-prepend {
+		width:  100%;
+		margin-bottom: 10px;
+	}
+	
+	.write-title {
+		width: 100%;
 		padding-left: 7px;
 		border-radius: 0;
 		box-sizing: border-box;
 		border: 1px solid silver;
+		height: 40px;
 	}
 	
-	#txtContent {
-		width: 99%;
+	.form-control {
+		width: 100%;
+		height: auto;
 	}
 	
 	.btn-outline-dark {
@@ -38,8 +49,26 @@
 	
 </style>
 <script type="text/javascript">
-
-
+	
+	$(function(){
+		$(".write-btn").click(function(){
+			let id = $('.write-title').val();
+			if(id == null || id == ""){
+				alert("제목을 입력하세요.");
+				$(".write-title").focus();
+				return false;
+			}
+			
+			let summernote = $('.write-content').val();
+			if(summernote == null || summernote == ""){
+				alert("내용을 입력하세요.");
+				return false;
+			}
+			
+			//위 두 검사가 성공한다면 form 전송하기
+			$("form").submit();
+		});
+	});
 
 </script>
 </head>
@@ -56,40 +85,38 @@
 	<!-- Services-->
 	<section class="page-section" id="services">
 		<div class="container">
-		<div class="rounded-3 write-form">
-			<form action="./write" method="post">
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
+			<div class="rounded-3 write-form">
+				<form action="./write" method="post" id="form">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<input placeholder="제목을 입력하세요" type="text" class="write-title" name="title">
+						</div>
+					<textarea placeholder="내용을 입력하세요" id="summernote" class="write-content" name="content"></textarea>
 					</div>
-					<input placeholder="제목을 입력하세요" type="text" id="write-title" name="title">
-				</div>
-					<textarea placeholder="내용을 입력하세요" id="txtContent" class="form-control" name="content"></textarea>
-			<button type="button" class="btn btn-outline-dark">저장</button>
-			</form>
+					<button type="submit" class="btn btn-outline-dark write-btn">저장</button>
+				</form>
 			</div>
 		</div>
-			
 	</section>
 	
-<script id="smartEditor" type="text/javascript"> 
-	var oEditors = [];
-	nhn.husky.EZCreator.createInIFrame({
-	    oAppRef: oEditors,
-	    elPlaceHolder: "txtContent",  //textarea ID 입력
-	    sSkinURI: "/smartEditor/SmartEditor2Skin.html",  //martEditor2Skin.html 경로 입력
-	    fCreator: "createSEditor2",
-	    htParams : { 
-	    	// 툴바 사용 여부 (true:사용/ false:사용하지 않음) 
-	        bUseToolbar : true, 
-		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음) 
-		bUseVerticalResizer : false, 
-		// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음) 
-		bUseModeChanger : false 
-	    }
+	<script>
+	$(document).ready(function() {
+	  $('#summernote').summernote({
+	  placeholder: '내용을 입력하세요.',
+	  tabsize: 1,
+      height: 500,
+      toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'video']],
+        ['view', ['fullscreen', 'codeview', 'help']]
+     	]
+	  });
 	});
-</script>
-
-
+    </script>
 	<!-- Bootstrap core JS-->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

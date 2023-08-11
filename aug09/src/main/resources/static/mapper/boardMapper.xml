@@ -3,13 +3,23 @@
 <mapper namespace="com.peazh.web.dao.BoardDAO">
 
 	<select id="boardList" resultType="com.peazh.web.dto.BoardDTO">
-		SELECT bno, btitle, m_name, m_id, bdate, bip, commentcount
+		SELECT bno, btitle, m_name, m_id, bdate, bip, commentcount, blike
 		FROM boardview LIMIT 0, 10
 	</select>
 	
-	<select id="detail" parameterType="Integer" resultType="String">
-		SELECT bcontent FROM boardview WHERE bno=#{bno }
+	<select id="detail" parameterType="Integer" resultType="com.peazh.web.dto.BoardDTO">
+		SELECT bcontent, uuid FROM boardview WHERE bno=#{bno }
 	</select>
+	
+	<!-- insert는 resultType 없습니다 -->
+	<insert id="write" parameterType="com.peazh.web.dto.BoardDTO">
+		INSERT INTO board (btitle, bcontent, m_no, bip, uuid)
+		VALUES (#{btitle }, #{bcontent }, (SELECT m_no FROM members WHERE m_id=#{m_id}), #{bip }, #{uuid })
+	</insert>
+	
+	<update id="readUp" parameterType="Integer">
+		UPDATE board SET blike = blike + 1 WHERE bno=#{bno }
+	</update>
 
 
 
