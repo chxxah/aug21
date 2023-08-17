@@ -3,6 +3,7 @@ package com.peazh.web.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class BoardController {
 	
 	@ResponseBody
 	@PostMapping("/detail")
-	public String detail(@RequestParam("bno") int bno ) {
+	public String detail(@RequestParam("bno") int bno) {
 		
 		BoardDTO dto = boardService.datail(bno);
 		
@@ -41,6 +42,7 @@ public class BoardController {
 		
 		json.put("content", dto.getBcontent());
 		json.put("uuid", dto.getUuid());
+		json.put("ip", dto.getBip());
 		
 		System.out.println(json.toString());
 		
@@ -53,12 +55,12 @@ public class BoardController {
 	}
 	
 	@PostMapping("/write")
-	public String write(HttpServletRequest request) {
+	public String write(HttpServletRequest request, HttpSession session) {
+		
 		BoardDTO dto = new BoardDTO();
 		dto.setBtitle(request.getParameter("title"));
 		dto.setBcontent(request.getParameter("content"));
-		dto.setM_id("peazh");
-		dto.setBip("0.0.0.0");
+		dto.setM_id(String.valueOf(session.getAttribute("mid")));
 		
 		int result = boardService.write(dto);
 		System.out.println(result);

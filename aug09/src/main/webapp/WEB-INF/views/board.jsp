@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -106,7 +107,7 @@ $(function(){
 				
 				$(".detail-name").html(name);
 				$(".detail-date").text(date);
-				$(".detail-read").text(read);
+				$(".detail-read").text(data.ip+" | "+read);
 				$(".detail-content").html(data.content);
 				$("#exampleModal").modal("show");
 			},
@@ -137,6 +138,8 @@ $(function(){
 	<!-- Services-->
 	<section class="page-section" id="services">
 		<div class="container">
+		<c:choose>
+			<c:when test="${fn:length(list) gt 0 }">
 			<table class="table table-hover table-striped">
 				<thead>
 					<tr class="row">
@@ -159,6 +162,9 @@ $(function(){
 					</c:forEach>
 				</tbody>
 			</table>
+					</c:when>
+				<c:otherwise>게시물이 없습니다.</c:otherwise>
+			</c:choose>
 			<button type="button" class="btn btn-outline-dark" onclick="location.href='./write'">write</button>
 			<button type="button" id="modal1" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">modal</button>
 			

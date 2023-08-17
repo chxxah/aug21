@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>WRITE</title>
+<title>MULTI BOARD WRITE</title>
 <script src="./js/jquery-3.7.0.min.js"></script>
 
 <!-- include summernote css/js -->
@@ -86,13 +86,14 @@
 	<section class="page-section" id="services">
 		<div class="container">
 			<div class="rounded-3 write-form">
-				<form action="./write" method="post" id="form">
+				<form action="./mbwrite" method="post" id="form">
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<input placeholder="제목을 입력하세요" type="text" class="write-title" name="title">
 						</div>
 					<textarea placeholder="내용을 입력하세요" id="summernote" class="write-content" name="content"></textarea>
 					</div>
+					<input type="hidden" name="board" value=${board }>
 					<button type="submit" class="btn btn-outline-dark write-btn">저장</button>
 				</form>
 			</div>
@@ -104,7 +105,7 @@
 	  $('#summernote').summernote({
 	  placeholder: '내용을 입력하세요.',
 	  tabsize: 1,
-      height: 500,
+	  height: 500,
       toolbar: [
         ['style', ['style']],
         ['font', ['bold', 'underline', 'clear']],
