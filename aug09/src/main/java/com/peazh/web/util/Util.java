@@ -98,5 +98,9 @@ public class Util {
 		}
 		return false;
 	}
+	
+	public int obj2Int(Object obj) {
+			return Integer.parseInt(String.valueOf(obj));
+	}
 
 }

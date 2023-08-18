@@ -6,9 +6,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.peazh.web.service.LoginService;
 
@@ -59,6 +62,20 @@ public class LoginController {
 		// 다른 방법
 		session.invalidate(); // 이 브라우저에서 연결된 session 모두 지우기
 		return "redirect:/";
+	}
+	
+	// PathVariable 경로변수 사용법
+	// 메뉴에서 로그인한 아이디를 가져온 거임 (sessionScope.mid)
+	@GetMapping("/myInfo@{id}")
+	public ModelAndView myIn(@PathVariable("id") String id, HttpSession session) {
+		
+		Map<String, Object> myInfo = loginService.myInfo(id);
+		ModelAndView mv = new ModelAndView("/myInfo");// 객체 선언하고 이동할 jsp 입력
+		mv.addObject("my", myInfo);// mv에 이름 붙이기 (jsp에 불릴 이름은 my임)
+		
+		// 개인 정보 수정할 때 암호를 암호화하기
+		System.out.println("jsp가 보내준 값 : " +id);
+		return mv;
 	}
 
 }
