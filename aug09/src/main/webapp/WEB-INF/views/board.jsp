@@ -11,6 +11,7 @@
 <link href="css/styles.css" rel="stylesheet" />
 <script src="./js/jquery-3.7.0.min.js"></script>
 <style type="text/css">
+
 	.title {
 		text-align: left;
 	}
@@ -46,8 +47,6 @@
 		width: 100%;
 		height: auto;
 	}
-	
-	
 	
 </style>
 <script type="text/javascript">

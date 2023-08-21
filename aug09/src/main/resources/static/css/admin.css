@@ -1,0 +1,120 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'intelone-mono-font-family-regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/intelone-mono-font-family-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+	font-family: 'intelone-mono-font-family-regular' !important;
+}
+
+body {
+   margin: 0;
+   padding: 0;
+   
+}
+
+.container {
+   width: 100%;
+   height: 100vh;
+   position: relative;
+}
+
+.menu {
+   position: absolute;
+   margin: 0;
+   padding: 0;
+   width: 52px;
+   height: 100vh;
+   background-color: #4CAF50;
+   float: left;
+   overflow: hidden;
+}
+
+.menu:hover {
+	width: 180px;
+	transition: 0.3s; /* hover slowly */
+}
+
+.menu-item {
+	width: 170px;
+	height: 50px;
+	line-height: 50px;
+	margin: 20px 5px;
+	color: white;
+	box-sizing: border-box;
+	overflow: hidden;
+	padding-left: 10px;
+}
+
+.menu-item:hover {
+	width: 170px;
+	height: 50px;
+	background-color: white;
+	color: black;
+	box-sizing: border-box;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.menu-item i {
+	margin-right: 15px;
+}
+
+.main {
+   width: calc(100% - 52px);
+   margin-left: 52px;
+   margin-top: 10px;
+   height: 100vh;
+   float: right;
+}
+
+.article {
+	width: calc(100% - 20px);
+	min-height: calc(100vh - 20px);
+	height:auto;
+	margin: 10px;
+	box-sizing: border-box;
+}
+
+h1 {
+	margin-top: 0;
+	text-align: center;
+}
+
+.box {
+	width: 100px;
+	height: 100px;
+	padding: 10px;
+	text-align: center;
+	line-height: 100px;
+	overflow: hidden;
+	transition: 0.3s;
+	border: 0px;
+	background-color: yellow;
+	float: left;
+}
+
+.box:hoverw {
+	font-size: large;
+	font-weight: bolder;
+	margin: 0px;
+	height: 200px;
+	width: 200px;
+	line-height: 100px;
+	transition: 0.4s;
+	border-radius: 20px;
+	margin: 50px;
+}
+
+#comment {
+	width: 100%;
+	height: 100px;
+	padding: 5px;
+	line-height: 30px;
+	overflow: visible;
+	animation: fadeInUp 1s;
+}

@@ -16,15 +16,15 @@
 				<ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
 					<li class="nav-item"><a class="nav-link" href="./board">BOARD</a></li>
 					<li class="nav-item"><a class="nav-link" href="./multiboard?board=1">MULTI BOARD</a></li>
-					<li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-					<li class="nav-item"><a class="nav-link" href="./team">Team</a></li>
+					<li class="nav-item"><a class="nav-link" href="./notice">NOTICE</a></li>
+					<li class="nav-item"><a class="nav-link" href="./team">TEAM</a></li>
 					<c:choose>
 						<c:when test="${sessionScope.mid ne null}">
-							<li class="nav-item"><a class="nav-link" href="./myInfo@${sessionScope.mid }">myInfo</a></li>
-							<li class="nav-item"><a class="nav-link" onclick="logout()">logout</a></li>
+							<li class="nav-item"><a class="nav-link" href="./myInfo@${sessionScope.mid }">MY INFO</a></li>
+							<li class="nav-item"><a class="nav-link" onclick="logout()">LOGOUT</a></li>
 						</c:when>
 						<c:otherwise>
-							<li class="nav-item"><a class="nav-link" href="./login">login</a></li>
+							<li class="nav-item"><a class="nav-link" href="./login">LOGIN</a></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>

@@ -92,7 +92,7 @@ $(function(){
 <title>admin</title>
 </head>
 <body>
-<div class="continer">
+<div class="container">
    <div class="main">
       <div class="article">
          <div class="login-box">
